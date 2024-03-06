@@ -4,6 +4,7 @@ const ErrorHandler = require("../utils/errorHandler");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
 const crypto = require("crypto")
+
 // Register a user
 exports.registerUser = catchAsyncError(async (req, res, next) => {
   const { name, email, password } = req.body;
@@ -17,12 +18,6 @@ exports.registerUser = catchAsyncError(async (req, res, next) => {
       url: "propicurl",
     },
   });
-
-  //    const token= user.getJWTToken()
-  //      res.status(201).json({
-  //         success:true,
-  //         token,
-  //     })
   sendToken(user, 201, res);
 });
 
@@ -76,7 +71,7 @@ exports.forgotPassword = catchAsyncError(async (req, res, next) => {
 
   const resetPasswordUrl = `${req.protocol}://${req.get(
     "host"
-  )}/api/v1/password/reset/${resetToken}`;
+  )}/password/reset/${resetToken}`;
 
   const message = `Your password reset token is :- \n\n ${resetPasswordUrl} \n\nIf you have not requested, then please ignore this email`;
 

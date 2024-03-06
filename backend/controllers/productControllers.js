@@ -1,8 +1,10 @@
+//recheck\
 const catchAsyncError = require("../middleware/catchAsyncError")
 const Product = require("../models/productModel")
 const ErrorHandler = require("../utils/errorHandler")
-//Create Prouct -- admin
+const apiFeatures  = require("../utils/apiFeatures")
 
+//Create Prouct -- admin
 exports.createProduct = catchAsyncError(async(req,res,next)=>{
     const product= await Product.create(req.body)
     res.status(201).json({
@@ -10,17 +12,6 @@ exports.createProduct = catchAsyncError(async(req,res,next)=>{
         product
     })
 })
-
-
-// Remove with catchAsyncError
-// exports.createProduct = async(req,res,next)=>{
-//     const product= await Product.create(req.body)
-//     res.status(201).json({
-//         success: true,
-//         product
-//     })
-// }
-
 
 //Get all products
 exports.getAllProducts =catchAsyncError(async (req,res)=>{
